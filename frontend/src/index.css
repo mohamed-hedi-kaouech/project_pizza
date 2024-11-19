@@ -1,0 +1,284 @@
+/* all */
+body {
+  font-family: Arial;
+  background: linear-gradient(to top, #09203f 0%, #537895 100%);
+  min-height: 99vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* sign_in & log_in css */
+.nav{
+  padding: 1px;
+}
+.nav h2{
+  float: left;
+}
+.nav a{
+  float: right;
+  color:white;
+}
+
+h1{
+  display: flex;
+  justify-content: center;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+.Log_n_container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+}
+section {
+  padding: 20px;
+  border-radius: 10px;
+}
+.name{
+  width: 39%;
+}
+.city{
+  width: 295px;
+}
+.text1,input[type='email'],input[type='password']{
+  width: 98%;
+}
+.submit{
+  color: rgb(75, 200, 223);
+  width: 100%;
+}
+.submit:hover{
+  color: rgb(75, 200, 223);
+  cursor: pointer;
+}
+
+.error {
+  display: none;
+}
+
+.error.visible {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  color:#ff0000; 
+  background-color: #ffe6e6;
+  padding: 10px;
+  margin: 10px 0px 0px 0px;
+  border: 1px solid #ff0000;
+  border-radius: 4px;
+}
+
+/* Account information */
+.account-container-update{
+    justify-content: center;
+    margin-top: 10%;
+    margin-left: 10%;
+    display: flex;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 150px;
+}
+.account-info-update .name{
+  width: 80%;
+}
+
+.account-info-update .text1,.account-info-update input[type='email']{
+  width: 80%;
+}
+.account-info-update .city{
+  width: 38%;
+}
+
+
+
+.Past-orders {
+  float: left;
+  width: 440px;
+  text-align: center;
+  margin-right: 10%;
+}
+.Past-orders p{
+  text-align: left;
+}
+.Past-orders .favorite {
+  float: right;
+}
+
+@media (max-width: 1200px) {
+  .account-container-update{
+    display: block;
+  }
+  .Past-orders {
+    justify-content: center;
+    width: 400px;
+    margin-top: 10px;
+    
+  }
+  .account-info-update{
+    width: 400px;
+  }
+  
+
+}
+
+
+/* nav bar home page */
+nav {
+  float: right;
+}
+
+nav ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: flex-start;
+}
+
+
+nav ul li a{
+  text-decoration: none;
+  padding: 5px 20px;
+  background-color: white;
+  border: 1px solid black;
+  color: black; 
+  border-radius: 3px;
+  font-weight: bold;
+  cursor: pointer;
+}
+nav ul li button{
+  text-decoration: none;
+  padding: 6px 24px;
+  background-color: white;
+  border: 1px solid black; 
+  color: black; 
+  border-radius: 3px; 
+  font-weight: bold;
+  cursor: pointer;
+}
+
+nav ul li a:hover, nav ul li button:hover {
+  background-color: #d0d0d0; 
+}
+
+nav ul li a.active {
+  background-color: #4a90e2;
+  color: white;
+}
+
+
+/* order options */
+h2{
+  text-align: center;
+}
+.pizza-container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.pizza-grid {
+  display: flex;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  padding: 20px;
+  margin-left: 20px;
+  width: auto;
+  justify-items: center;
+}
+
+@media (max-width: 850px) {
+  .pizza-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .pizza-container {
+    margin-top:100px;
+  }
+
+}
+
+.pizza-option {
+  background-color: #fff;
+  border: 1px solid black;
+  padding: 20px;
+  width: 90%;
+  text-align: center;
+}
+
+.pizza-option h3 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.pizza-option p {
+  font-size: 0.9em;
+  margin-bottom: 15px;
+}
+
+.pizza-option button:hover {
+  background-color: #ddd;
+}
+
+/* Order css */
+.Form-container{
+  text-align: center;
+  margin-top: 50px;
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  margin-left: 190px;
+}
+
+.Form-container form {
+  padding: 10px;
+}
+
+.Form-container input[type="number"],.Form-container select {
+  padding: 1px;
+  width: 100px;
+  margin-bottom: 10px;
+}
+ .Form-container select[id='method']{
+  width: 100%;
+}
+.topping-label-cell{
+  vertical-align: top;
+}
+
+/* Toppings Section */
+.Form-container fieldset {
+  padding: 10px;
+}
+
+.Form-container .toppings-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+}
+
+.check{
+  display: flex;
+  justify-content: center ;
+  
+}
+.check .Orders{
+  width: 300px;
+}
+
+.Btns .reset{
+  width: 100%;
+  background-color: red;
+}
+
+.Btns{
+  display: flex;
+  justify-content: space-between ;
+  gap: 15px;
+}
+.Btns .reset:hover{
+  background-color: rgb(233, 122, 122);
+  cursor: pointer;
+}
