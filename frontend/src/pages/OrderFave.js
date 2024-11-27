@@ -30,6 +30,7 @@ const Order = () =>{
     let [id, setID]=useState(location.state ||{});
     let [NumberOrders, setNumberOrders]=useState(0);
     const [Orders] = useState([]);
+    const [Pizzas] = useState([]);
     const navigate = useNavigate();
 
     
@@ -56,6 +57,23 @@ const Order = () =>{
         console.log(id);
         if (!mongoose.Types.ObjectId.isValid(id)) {
             navigate('/log_in');
+        }
+        else{
+            NavOrderFave();
+            const fetchpizza = async()=>{
+                const response = await fetch('/api/pizza/'+id)
+                const json = await response.json();
+                if (response.ok){
+                    for (let p = 0; p < json.length; p++) {
+                        if(json[p].favorite){
+                            Pizzas.push(json[p]);
+                            p=1000;
+                        }
+                    }
+                }
+            }
+            fetchpizza();
+            
         }
         
     },[id,navigate])
@@ -129,6 +147,7 @@ const Order = () =>{
         window.location.reload();
     }
 
+
     // Navigation functions
     const Log_out= async ()=> {
         setID(null);
@@ -138,8 +157,8 @@ const Order = () =>{
     const NavHome= async ()=> {
         navigate('/Home', { state:  id });
     }
-    const NavOrder= async ()=> {
-        navigate('/Order', { state:  id });
+    const NavOrderFave= async ()=> {
+        navigate('/OrderFave', { state:  id });
     }
     const reset= async ()=> {
         window.location.reload();
@@ -169,7 +188,7 @@ const Order = () =>{
                     <ul>
                     <BottomNavigation showLabels sx={{ width: '400px' , borderRadius: 2}} >
                         <BottomNavigationAction onClick={NavHome} label="Home" icon={<HomeIcon />}  />
-                        <BottomNavigationAction onClick={NavOrder} label={`Order (${NumberOrders})`}  icon={<ShoppingCartIcon />}  />
+                        <BottomNavigationAction onClick={NavOrderFave} label={`Order (${NumberOrders})`}  icon={<ShoppingCartIcon />}  />
                         <BottomNavigationAction onClick={Log_out} label="Logout" icon={<ExitToAppIcon />} />
                     </BottomNavigation>
                     </ul>
@@ -335,7 +354,7 @@ const Order = () =>{
                     }}
                 >
                     <h2>YOUR ORDER</h2>
-                    {Orders.map((order) => (
+                    {Pizzas && Pizzas.map((order) => (
                         <Box sx={{ borderRadius: 2 }}>
                             <Typography variant="body1"><strong>Method:</strong> {order.Method}</Typography>
                             <Typography variant="body1"><strong>Qty:</strong> {order.Quantity}</Typography>

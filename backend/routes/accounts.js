@@ -14,10 +14,8 @@ const {
 }=require("../controllers/accountController")
 
 
-//get all accounts function
 router.get('/',getaccounts)
 
-//get a single account by id in url function
 router.get('/:id',getaccount)
 
 router.post('/',createaccount)

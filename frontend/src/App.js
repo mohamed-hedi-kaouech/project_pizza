@@ -3,6 +3,8 @@ import Sign_up from './pages/Sign_up';
 import Log_in from './pages/Log_in';
 import Home from './pages/Home';
 import Order from './pages/Order';
+import OrderFave from './pages/OrderFave';
+import OrderSurprise from './pages/OrderSurprise';
 
 
 
@@ -17,6 +19,8 @@ function App() {
             <Route path="/Log_in" element={<Log_in />} />
             <Route path="/Home" element={<Home />} />
             <Route path="/Order" element={<Order />} />
+            <Route path="/OrderFave" element={<OrderFave />} />
+            <Route path="/OrderSurprise" element={<OrderSurprise />} />
           </Routes>
         </div>
       </BrowserRouter>

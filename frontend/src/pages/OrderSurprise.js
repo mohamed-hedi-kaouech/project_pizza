@@ -138,8 +138,8 @@ const Order = () =>{
     const NavHome= async ()=> {
         navigate('/Home', { state:  id });
     }
-    const NavOrder= async ()=> {
-        navigate('/Order', { state:  id });
+    const NavOrderFave= async ()=> {
+        navigate('/OrderFave', { state:  id });
     }
     const reset= async ()=> {
         window.location.reload();
@@ -169,7 +169,7 @@ const Order = () =>{
                     <ul>
                     <BottomNavigation showLabels sx={{ width: '400px' , borderRadius: 2}} >
                         <BottomNavigationAction onClick={NavHome} label="Home" icon={<HomeIcon />}  />
-                        <BottomNavigationAction onClick={NavOrder} label={`Order (${NumberOrders})`}  icon={<ShoppingCartIcon />}  />
+                        <BottomNavigationAction onClick={NavOrderFave} label={`Order (${NumberOrders})`}  icon={<ShoppingCartIcon />}  />
                         <BottomNavigationAction onClick={Log_out} label="Logout" icon={<ExitToAppIcon />} />
                     </BottomNavigation>
                     </ul>
@@ -238,6 +238,7 @@ const Order = () =>{
                                             onChange={(e) => setCrust(e.target.value)}
                                             label="Crust"
                                         >
+                                            
                                             <MenuItem value="Thin Crust">Thin Crust</MenuItem>
                                             <MenuItem value="Thick Crust">Thick Crust</MenuItem>
                                         </Select>
@@ -294,6 +295,7 @@ const Order = () =>{
                                             <Checkbox
                                                 id={topping}
                                                 value={topping}
+                                                checked={Math.random() < 0.5}
                                                 onChange={handleToppingChange}
                                             />
                                             }

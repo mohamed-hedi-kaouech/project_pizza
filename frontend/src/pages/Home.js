@@ -74,11 +74,12 @@ const Home = () =>{
     const NavHome= async ()=> {
         navigate('/Home', { state:  id });
     }
-    const NavAccount= async ()=> {
-        // navigate('/');
-        window.location.reload();
+    const NavOrderFave= async ()=> {
+        navigate('/OrderFave', { state:  id });
     }
-
+    const NavOrderSurprise= async ()=> {
+        navigate('/OrderSurprise', { state:  id });
+    }
     
     return (
         <html lang="en">
@@ -104,7 +105,6 @@ const Home = () =>{
                         <BottomNavigation showLabels sx={{ width: '400px' , borderRadius: 2 }} >
                             <BottomNavigationAction onClick={NavHome} label="Home" icon={<HomeIcon />}  />
                             <BottomNavigationAction onClick={NavOrder} label="Order" icon={<ShoppingCartIcon />}  />
-                            <BottomNavigationAction onClick={NavAccount} label="Account" icon={<AccountCircleIcon />}  />
                             <BottomNavigationAction onClick={Log_out} label="Logout" icon={<ExitToAppIcon />} />
                         </BottomNavigation>
                     </ul>
@@ -130,7 +130,7 @@ const Home = () =>{
                         <Box className="pizza-option" sx={{ p: 2, boxShadow: 2, borderRadius: 2, textAlign: 'center' }}>
                             <Typography variant="h5">Re-order My Fave</Typography>
                             <Typography variant="body1" gutterBottom>Description for Re-order My Fave</Typography>
-                            <Button variant="contained" className="submit"  onClick={NavOrder}>
+                            <Button variant="contained" className="submit"  onClick={NavOrderFave}>
                             RE-ORDER MY FAVE
                             </Button>
                         </Box>
@@ -140,7 +140,7 @@ const Home = () =>{
                         <Box className="pizza-option" sx={{ p: 2, boxShadow: 2, borderRadius: 2, textAlign: 'center' }}>
                             <Typography variant="h5">Surprise Me</Typography>
                             <Typography variant="body1" gutterBottom>Description for Surprise Me</Typography>
-                            <Button variant="contained" className="submit" onClick={NavOrder}>
+                            <Button variant="contained" className="submit" onClick={NavOrderSurprise}>
                             SURPRISE ME
                             </Button>
                         </Box>
