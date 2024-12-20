@@ -1,5 +1,4 @@
 import {useEffect, useState } from "react" ;
-import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -12,12 +11,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
-const mongoose= require('mongoose');
-
 const Order = () =>{
-    const location = useLocation();
-
-
     const [Method, setMethod]=useState('');
     const [Size, setSize]=useState('');
     const [Crust, setCrust]=useState('');
@@ -27,12 +21,9 @@ const Order = () =>{
     let [error, setError]=useState(null);
     let [price, setPrice]=useState(0);
     let [Tprice, setTPrice]=useState(0);
-    let [id, setID]=useState(location.state ||{});
     let [NumberOrders, setNumberOrders]=useState(0);
     const [Orders] = useState([]);
     const navigate = useNavigate();
-
-    
 
 
     const toppings = [
@@ -52,12 +43,13 @@ const Order = () =>{
 
     const selectedToppingsString = selectedToppings.join(', ');
 
+    const token = localStorage.getItem("authToken_id");
+    let id=token;
+
     useEffect (()=> {
-        console.log(id);
-        if (!mongoose.Types.ObjectId.isValid(id)) {
+        if (!token) {
             navigate('/log_in');
-        }
-        
+        }        
     },[id,navigate])
 
 
@@ -110,7 +102,7 @@ const Order = () =>{
         const pizza={Account_id, Ingredients, Size, Quantity, favorite, Method, Crust, price};
         Orders.push(pizza);
         setNumberOrders(NumberOrders);
-        navigate('/Order', { state:  id });
+        navigate('/Order');
     }
     const Submit= async()=>{
         Orders.forEach(async pizza => {
@@ -131,20 +123,20 @@ const Order = () =>{
 
     // Navigation functions
     const Log_out= async ()=> {
-        setID(null);
-        localStorage.removeItem('token');
-        navigate('/log_in',{ replace: true });
+        localStorage.removeItem("authToken_id");
     }
     const NavHome= async ()=> {
-        navigate('/Home', { state:  id });
+        navigate('/Home');
     }
     const NavOrder= async ()=> {
-        navigate('/Order', { state:  id });
+        navigate('/Order');
     }
     const reset= async ()=> {
         window.location.reload();
     }
-
+    const NavAccount= async ()=> {
+        navigate('/Account');
+    }
     return (
         <html lang="en">
         <head>
@@ -167,11 +159,12 @@ const Order = () =>{
                 <h2>PIZZA PETE'S</h2>
                 <nav>
                     <ul>
-                    <BottomNavigation showLabels sx={{ width: '400px' , borderRadius: 2}} >
-                        <BottomNavigationAction onClick={NavHome} label="Home" icon={<HomeIcon />}  />
-                        <BottomNavigationAction onClick={NavOrder} label={`Order (${NumberOrders})`}  icon={<ShoppingCartIcon />}  />
-                        <BottomNavigationAction onClick={Log_out} label="Logout" icon={<ExitToAppIcon />} />
-                    </BottomNavigation>
+                        <BottomNavigation showLabels sx={{ width: '400px' , borderRadius: 2 }} >
+                            <BottomNavigationAction onClick={NavHome} label="Home" icon={<HomeIcon />}  />
+                            <BottomNavigationAction onClick={NavOrder} label={`Order(${NumberOrders})`} icon={<ShoppingCartIcon />}  />
+                            <BottomNavigationAction onClick={NavAccount} label="Account" icon={<AccountCircleIcon />}  />
+                            <BottomNavigationAction onClick={Log_out} label="Logout" icon={<ExitToAppIcon />} />
+                        </BottomNavigation>
                     </ul>
                 </nav>
             </div>

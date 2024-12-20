@@ -1,5 +1,4 @@
 import {useEffect, useState } from "react" ;
-import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -12,12 +11,8 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
-const mongoose= require('mongoose');
 
 const Order = () =>{
-    const location = useLocation();
-
-
     const [Method, setMethod]=useState('');
     const [Size, setSize]=useState('');
     const [Crust, setCrust]=useState('');
@@ -27,7 +22,6 @@ const Order = () =>{
     let [error, setError]=useState(null);
     let [price, setPrice]=useState(0);
     let [Tprice, setTPrice]=useState(0);
-    let [id, setID]=useState(location.state ||{});
     let [NumberOrders, setNumberOrders]=useState(0);
     const [Orders] = useState([]);
     const [Pizzas] = useState([]);
@@ -53,13 +47,14 @@ const Order = () =>{
 
     const selectedToppingsString = selectedToppings.join(', ');
 
+    const token = localStorage.getItem("authToken_id");
+    let id=token;
+
     useEffect (()=> {
-        console.log(id);
-        if (!mongoose.Types.ObjectId.isValid(id)) {
+        if (!token) {
             navigate('/log_in');
-        }
+        }  
         else{
-            NavOrderFave();
             const fetchpizza = async()=>{
                 const response = await fetch('/api/pizza/'+id)
                 const json = await response.json();
@@ -70,13 +65,13 @@ const Order = () =>{
                             p=1000;
                         }
                     }
+                    
                 }
             }
             fetchpizza();
-            
+
         }
-        
-    },[id,navigate])
+    },[navigate])
 
 
     const addorder= async (e)=> {
@@ -150,15 +145,16 @@ const Order = () =>{
 
     // Navigation functions
     const Log_out= async ()=> {
-        setID(null);
-        localStorage.removeItem('token');
-        navigate('/log_in',{ replace: true });
+        localStorage.removeItem("authToken_id");
     }
     const NavHome= async ()=> {
-        navigate('/Home', { state:  id });
+        navigate('/Home');
+    }
+    const NavAccount= async ()=> {
+        navigate('/Account');
     }
     const NavOrderFave= async ()=> {
-        navigate('/OrderFave', { state:  id });
+        navigate('/OrderFave');
     }
     const reset= async ()=> {
         window.location.reload();
@@ -186,11 +182,12 @@ const Order = () =>{
                 <h2>PIZZA PETE'S</h2>
                 <nav>
                     <ul>
-                    <BottomNavigation showLabels sx={{ width: '400px' , borderRadius: 2}} >
-                        <BottomNavigationAction onClick={NavHome} label="Home" icon={<HomeIcon />}  />
-                        <BottomNavigationAction onClick={NavOrderFave} label={`Order (${NumberOrders})`}  icon={<ShoppingCartIcon />}  />
-                        <BottomNavigationAction onClick={Log_out} label="Logout" icon={<ExitToAppIcon />} />
-                    </BottomNavigation>
+                        <BottomNavigation showLabels sx={{ width: '400px' , borderRadius: 2 }} >
+                            <BottomNavigationAction onClick={NavHome} label="Home" icon={<HomeIcon />}  />
+                            <BottomNavigationAction onClick={NavOrderFave} label={`Order(${NumberOrders})`} icon={<ShoppingCartIcon />}  />
+                            <BottomNavigationAction onClick={NavAccount} label="Account" icon={<AccountCircleIcon />}  />
+                            <BottomNavigationAction onClick={Log_out} label="Logout" icon={<ExitToAppIcon />} />
+                        </BottomNavigation>
                     </ul>
                 </nav>
             </div>
@@ -362,7 +359,6 @@ const Order = () =>{
                             <Typography variant="body1"><strong>Crust:</strong> {order.Crust}</Typography>
                             <Typography variant="body1"><strong>Toppings:</strong> {order.Ingredients}</Typography>
                             <Typography sx={{ textAlign: 'right' }} variant="body1"><strong>PRICE:</strong> <span>{order.price}$</span></Typography>
-                            
                             <hr></hr>
                         </Box>
                     ))}

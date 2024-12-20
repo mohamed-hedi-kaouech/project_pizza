@@ -32,7 +32,8 @@ const Log_in = () =>{
                         return setError("Invalid Password");
                     }else{
                         let id= Exist._id;
-                        navigate('/Home', { state:  id });
+                        localStorage.setItem("authToken_id", id);
+                        navigate('/Home');
                     }
                 }else{
                     return setError("Account not Found");

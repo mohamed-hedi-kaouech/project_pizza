@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Order from './pages/Order';
 import OrderFave from './pages/OrderFave';
 import OrderSurprise from './pages/OrderSurprise';
+import Account from './pages/Account';
 
 
 
@@ -21,6 +22,7 @@ function App() {
             <Route path="/Order" element={<Order />} />
             <Route path="/OrderFave" element={<OrderFave />} />
             <Route path="/OrderSurprise" element={<OrderSurprise />} />
+            <Route path="/Account" element={<Account />} />
           </Routes>
         </div>
       </BrowserRouter>

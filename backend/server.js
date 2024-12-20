@@ -12,7 +12,6 @@ const app= express();
 
 // createaccount();
 
-app.use(express.json());
 
 app.use((req, res,next) => {
     console.log(req.path, req.method);

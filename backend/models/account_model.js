@@ -35,6 +35,14 @@ const Account=new Schema({
     }
 },{timestamps:true});
 
+Account.pre('save',async function(next){
+    if(!this.isModified('Password')) return next();
+
+    const salt = await bcrypt.genSalt(10);
+    this.Password = await bcrypt.hash(this.Password,salt);
+    next();
+})
+
 module.exports=mongoose.model('Account',Account);
 
 
