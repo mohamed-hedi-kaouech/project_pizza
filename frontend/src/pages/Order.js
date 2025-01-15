@@ -45,7 +45,8 @@ const Order = () =>{
 
     const token = localStorage.getItem("authToken_id");
     let id=token;
-
+    let Account_id=id;
+    
     useEffect (()=> {
         if (!token) {
             navigate('/log_in');
@@ -56,7 +57,6 @@ const Order = () =>{
     const addorder= async (e)=> {
         e.preventDefault();
         const Ingredients = selectedToppingsString;
-        const Account_id=id;
         price=0;
 
         let emptyFileds="";
@@ -124,6 +124,7 @@ const Order = () =>{
     // Navigation functions
     const Log_out= async ()=> {
         localStorage.removeItem("authToken_id");
+        navigate('/Log_in');
     }
     const NavHome= async ()=> {
         navigate('/Home');

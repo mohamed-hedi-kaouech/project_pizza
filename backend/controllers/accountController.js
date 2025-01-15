@@ -48,9 +48,9 @@ const createaccount = async(req, res)=>{
         return res.status(400).json({ error:'Please fill in all the fields : '+emptyFileds});
     }
 
-    const Exist=account.findOne({Email});
-    if(Exist){
-        return  res.status(404).json({error:"Email already Exist"});
+    const Exist = await account.findOne({ Email });
+    if (Exist) {
+        return res.status(400).json({ error: "Email already exists" });
     }else{
         //add to data base
         try{

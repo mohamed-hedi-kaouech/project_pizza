@@ -49,6 +49,7 @@ const Order = () =>{
 
     const token = localStorage.getItem("authToken_id");
     let id=token;
+    let Account_id=id;
 
     useEffect (()=> {
         if (!token) {
@@ -146,6 +147,7 @@ const Order = () =>{
     // Navigation functions
     const Log_out= async ()=> {
         localStorage.removeItem("authToken_id");
+        navigate('/Log_in');
     }
     const NavHome= async ()=> {
         navigate('/Home');

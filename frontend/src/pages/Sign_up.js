@@ -20,8 +20,7 @@ const Sign_up = () =>{
         
         if(CPassword===Password){
             const account={FirstName, LastName, Email, Address, City, State, Password};
-
-            const response = await fetch('/api/account/', {
+            const response = await fetch('/api/account/',{
                 method:'POST',
                 body:JSON.stringify(account),
                 headers:{

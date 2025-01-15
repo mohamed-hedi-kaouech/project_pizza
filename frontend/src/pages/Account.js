@@ -21,6 +21,7 @@ const Home = () =>{
 
     const token = localStorage.getItem("authToken_id");
     let id=token;
+    let Account_id=id;
 
 
     useEffect (()=> {
@@ -62,6 +63,7 @@ const Home = () =>{
     // Navigation functions
     const Log_out= async ()=> {
         localStorage.removeItem("authToken_id");
+        navigate('/Log_in');
     }
     const NavOrder= async ()=> {
         navigate('/Order');
